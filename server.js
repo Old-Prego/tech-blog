@@ -20,6 +20,8 @@ const usersession = {
     })
 };
 
+app.use(session(usersession));
+
 const handlebars = handlebarsexpress.create({ helpers });
 
 app.engine('handlebars', handlebars.engine);

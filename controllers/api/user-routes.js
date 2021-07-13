@@ -61,3 +61,5 @@ router.post('/login', async (req, res) => {
       res.status(400).json({ message: 'Your username or password are incorrect!' });
     }
   });
+
+  module.exports = router;
