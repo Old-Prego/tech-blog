@@ -8,10 +8,23 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <nav>This is where the navbar will be</nav>
+    <nav class="navbar">
+        <ul>
+            <li><a href="/">Homepage</a></li>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="#" id="logout-link">Logout</a></li>
+        </ul>
+    </nav>
     
     <main>
         {{{body}}}
     </main>
+
+    <footer>
+        <a href="/dashboard/new">Create a New Post</a>
+    </footer>
 </body>
+
+<script src="/js/logout.js"></script>
+
 </html>
