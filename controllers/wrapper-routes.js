@@ -27,6 +27,7 @@ router.get('/', async (req, res) => {
 
         res.render('posts', { posts });
     } catch (err) {
+        console.log("This is the error");
         res.status(500).json(err);
     }
 });
