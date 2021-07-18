@@ -5,8 +5,8 @@ class Post extends Model {}
 
 Post.init(
     {
-        header: DataTypes.STRING,
-        text: DataTypes.STRING
+        title: DataTypes.STRING,
+        body: DataTypes.STRING
     },
     {
         sequelize

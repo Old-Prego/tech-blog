@@ -1,59 +1,62 @@
 const router = require('express').Router();
-const { User, Post, Comment } = require('../models/');
+const { Post, Comment, User } = require('../models');
 
-router.get('/signup', (req, res) => {
-    if(req.session.loggedIn) {
-        res.redirect('/');
-        return;
+// get all posts for homepage
+router.get('/', async (req, res) => {
+  try {
+    const postData = await Post.findAll({
+      include: [User],
+    });
+
+    const posts = postData.map((post) => post.get({ plain: true }));
+
+    res.render('all-posts', { posts });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// get single post
+router.get('/post/:id', async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id, {
+      include: [
+        User,
+        {
+          model: Comment,
+          include: [User],
+        },
+      ],
+    });
+
+    if (postData) {
+      const post = postData.get({ plain: true });
+
+      res.render('single-post', { post });
+    } else {
+      res.status(404).end();
     }
-
-    res.render('signup');
-})
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 router.get('/login', (req, res) => {
-    if (req.session.loggedIn) {
-        res.redirect('/');
-        return;
-    }
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+
+  res.render('login');
 });
 
-router.get('/', async (req, res) => {
-    try {
-        const postData = await Post.findall({
-            include: [User],
-        });
+router.get('/signup', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
 
-        const posts = postData.map((post) => post.get({ plain: true }));
-
-        res.render('posts', { posts });
-    } catch (err) {
-        console.log("This is the error");
-        res.status(500).json(err);
-    }
-});
-
-router.get('/post/:id', async (req, res) => {
-    try {
-        const postData = await Post.findByPk(req.params.id, {
-            include: [
-                User,
-                {
-                    model: Comment,
-                    include: [User],
-                },
-            ],
-        });
-
-        if (postData) {
-            const post = postData.get({ plain: true });
-
-            res.render('single-post', { post });
-        } else {
-            res.status(404).end();
-        }
-    } catch (err) {
-        res.status(500).json(err);
-    }
+  res.render('signup');
 });
 
 module.exports = router;
