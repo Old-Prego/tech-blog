@@ -12,6 +12,7 @@
   - [License](#license)
   - [Questions](#questions)
   - [Github](#github)
+  - [Deployed App](#deployed-app)
 
 ## Description  
 This is a homework assignment for a bootcamp where we needed to build a tech blog using express servers and handlebars for view management."  
@@ -30,3 +31,6 @@ If you have any further questions, please reach out to me at lukejperrine@gmail.
 
 ## Github
 [Old-Prego](https://github.com/Old-Prego)
+
+## Deployed App
+[Link to the deployed application](https://serene-forest-39093.herokuapp.com/)
